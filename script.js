@@ -1,7 +1,7 @@
 const imageContainer = document.getElementById("imagesBox");
 
 const fetchingDBImages = () => {
-  return fetch("https://dragonball-api.com/api/characters").then((response) =>
+  return fetch("https://dragonball-api.com/api/characters?limit=58").then((response) =>
     response.json(),
   );
 };
