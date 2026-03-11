@@ -1,8 +1,10 @@
 const imageContainer = document.getElementById("imagesBox");
 
+let limit = 58;
+
 const fetchingDBImages = () => {
-  return fetch("https://dragonball-api.com/api/characters?limit=58").then((response) =>
-    response.json(),
+  return fetch(`https://dragonball-api.com/api/characters?limit=${limit}`).then(
+    (response) => response.json(),
   );
 };
 
@@ -20,7 +22,6 @@ const displayingImages = async () => {
     const eachImageEle = document.createElement("img");
     const textBox = document.createElement("div");
     const characterTitle = document.createElement("h2");
-    const characterTag = document.createElement("p");
     const characterTagVal = document.createElement("p");
 
     eachImgCard.classList.add("each-card");
@@ -33,6 +34,7 @@ const displayingImages = async () => {
     eachImageEle.alt = `image-${eachItem.name}`;
     characterTagVal.classList.add("def-clr", "custom-clr");
     characterTitle.classList.add("def-clr", "text-title");
+    characterTagVal.style.marginBottom = "25px";
 
     characterTitle.textContent = eachItem.name;
     characterTagVal.textContent = `${eachItem.race} - ${eachItem.gender}`;
@@ -40,7 +42,6 @@ const displayingImages = async () => {
     eachImgCard.appendChild(eachImageEle);
     textBox.appendChild(characterTitle);
     textBox.appendChild(characterTagVal);
-    textBox.appendChild(characterTag);
 
     let characterDetails = {
       Affiliation: eachItem.affiliation,
@@ -58,7 +59,7 @@ const displayingImages = async () => {
       characterTag.classList.add("def-clr");
       characterTagVal.classList.add("def-clr", "custom-clr");
 
-      characterTagVal.style.marginBottom = "8px";
+      characterTagVal.style.marginBottom = "5px";
 
       textBox.appendChild(characterTag);
       textBox.appendChild(characterTagVal);
@@ -71,9 +72,10 @@ const displayingImages = async () => {
 
 displayingImages();
 
-window.addEventListener("scroll", () => {
-  let currentScroll = window.scrollY;
-  if (currentScroll % 1000 === 0) {
-    displayingImages();
-  }
-});
+// window.addEventListener("scroll", () => {
+//   let currentScroll = window.scrollY;
+//   if (currentScroll % 1000 === 0) {
+//     limit < 58 ? (limit += 5) : limit;
+//     displayingImages();
+//   }
+// });
